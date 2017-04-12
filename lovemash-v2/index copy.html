@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<!--
+
+This page shows a potential match
+* name1: name of the lefthand person
+* name2: name of the righthand person
+
+-->
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>LoveMash</title>
+        <meta name="description" content="LoveMash - Play matchmaker. Connect">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        
+        <div id="top-banner">
+        	<div id="wrapper">
+        		<div id="logo">
+        			<a href="http://lovemash.us"><img src="img/lovemash-300.png" width="300" height="72" /></a>
+        		</div> <!-- #logo -->
+        		<div id="loginout">
+        			{% if not session.logged_in %}
+        				<a href="{{ url_for('login') }}">Login</a>
+  					{% else %}
+    					<a href="{{ url_for('logout') }}">Logout</a>
+  					{% endif %}
+  					<!-- <a href="{{ url_for('login') }}">Login</a> -->
+        		</div> <!-- #loginout -->
+        	</div> <!-- #wrapper -->
+        </div> <!-- #top-banner -->
+        <div id="content-wrapper">
+	        <div id="content">
+	        	<!-- {% if session.logged_in %} -->
+					<div id="should">
+						Should
+					</div> <!-- #should -->
+					<div id="left-image">
+						<div class="lock">
+							L
+						</div> <!-- #lock -->
+						<div class="trash">
+							X
+						</div> <!-- #trash -->
+						<div class="annotate">
+							A
+						</div> <!-- #annotate -->
+						<div class="profile-image">
+							<img src="https://graph.facebook.com/{{ fb_id1 }}/picture?width=200&height=200" width="200px" height="200px" />
+						</div> <!-- #profile-image -->
+						<div class="name">
+							{{ name1 }}
+						</div> <!-- #name -->
+					</div> <!-- #left-image -->
+					<div id="and">
+						and
+					</div> <!-- #and -->
+					<div id="right-image">
+						<div class="lock">
+							L
+						</div> <!-- #lock -->
+						<div class="trash">
+							X
+						</div> <!-- #trash -->
+						<div class="annotate">
+							A
+						</div> <!-- #annotate -->
+						<div class="profile-image">
+							<img src="https://graph.facebook.com/{{ fb_id2 }}/picture?width=200&height=200" width="200px" height="200px" />
+						</div> <!-- #profile-image -->
+						<div class="name">
+							{{ name2 }}
+						</div> <!-- #name -->
+					</div> <!-- #right-image -->
+					<div id="question">
+						<select>
+							<option value="date">date?</option>
+							<option value="be-friends">be friends?</option>
+							<option value="connect">connect?</option>
+							<option value="other">other?</option>
+						</select>
+					</div> <!-- #question -->
+					<div class="yesno">
+						<a href="{{ url_for('yes') }}">Yes</a>
+					</div> <!-- #yesno -->
+					<div class="yesno">
+						<a href="{{ url_for('no') }}">No</a>
+					</div> <!-- #yesno -->
+				<!-- {% endif %} -->
+	        </div> <!-- #content -->
+	    </div> <!-- #wrapper -->
+        
+        
+        
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-38371647-1'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

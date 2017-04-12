@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<!--
+
+This page shows a potential match
+* login: login link
+* logout: logout link
+* name1: name of the lefthand person
+* name2: name of the righthand person
+* fb_id1: Facebook ID of the lefthand person
+* fb_id2: Facebook ID of the righthand person
+* lock_state: returns "locked" for showing the locked sprite and returns "unlocked" for showing the unlocked sprite (visual cue for user to know whether they are locking either the person on the right or the left)
+* interest1: gender the lefthand person is interested in (i.e. the person's own gender)
+* interest2: gender the lefthand person is interested in (i.e. the person's own gender)
+* url_for('lock1'): locks lefthand person
+* url_for('lock2'): locks righthand person
+
+-->
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>LoveMash</title>
+        <meta name="description" content="LoveMash - Play matchmaker. Connect your friends. Get all of the credit.">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+	<script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
+
+	<script>
+	function writeVote(name_a, name_b, theVal, nna, nnb){
+	$.post("http://127.0.0.1:5000/insert_vote", {uid1:name_a, uid2:name_b, val:theVal}).done(function() { window.location = "http://127.0.0.1:5000/match/" + "{{ mode }}" + nna + "/" + nnb; })
+	}
+	</script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        
+        <div id="top-banner">
+        	<div id="wrapper">
+        		<div id="logo">
+        			<a href="http://lovemash.us"><img src="{{ url_for('static', filename='img/lovemash-300.png') }}" width="300" height="72" /></a>
+        		</div> <!-- #logo -->
+        		<div id="loginout">
+        			{% if not session.logged_in %}
+        				<a href="{{ url_for('login') }}">Login</a>
+  					{% else %}
+    					<a href="{{ url_for('logout') }}">Logout</a>
+  					{% endif %}
+  					<!-- <a href="{{ url_for('login') }}">Login</a> -->
+        		</div> <!-- #loginout -->
+        	</div> <!-- #wrapper -->
+        </div> <!-- #top-banner -->
+        <div id="content-wrapper">
+	        <div id="content">
+	        	<!-- {% if not session.logged_in %} -->
+					<div id="should">
+						Should
+					</div> <!-- #should -->
+					<div id="left-image">
+						<a href=""> <!-- lock1 -->
+							<div id="{{ lock_state1 }}" class="lock">
+							</div> <!-- .lock -->
+						</a>
+						<div class="trash">
+							X
+						</div> <!-- .trash -->
+						<div class="annotate">
+							A
+						</div> <!-- .annotate -->
+						<div class="profile-image">
+							<img src="https://graph.facebook.com/{{ fb_id1 }}/picture?width=200&height=200" width="200px" height="200px" />
+						</div> <!-- .profile-image -->
+						<div class="name">
+							{{ name1 }}
+						</div> <!-- .name -->
+					</div> <!-- #left-image -->
+					<div id="and">
+						and
+					</div> <!-- #and -->
+					<div id="right-image">
+						<a href=""> <!-- lock1 -->
+							<div id="{{ lock_state2 }}" class="lock">
+							</div> <!-- .lock -->
+						</a>
+						<div class="trash">
+							X
+						</div> <!-- .trash -->
+						<div class="annotate">
+							A
+						</div> <!-- .annotate -->
+						<div class="profile-image">
+							<img src="https://graph.facebook.com/{{ fb_id2 }}/picture?width=200&height=200" width="200px" height="200px" />
+						</div> <!-- .profile-image -->
+						<div class="name">
+							{{ name2 }}
+						</div> <!-- .name -->
+					</div> <!-- #right-image -->
+					<div id="question">
+						<select>
+							<option value="date">date?</option>
+							<option value="be-friends">be friends?</option>
+							<option value="connect">connect?</option>
+							<option value="other">other?</option>
+						</select>
+					</div> <!-- #question -->
+					<div id="yes" class="yesno">
+						<div id="yessir"><a href="javascript:void(0)" onclick=writeVote({{uid1}},{{uid2}},1,{{nn1uid}},{{nn2uid}});><span id="yesyes">Yes,</span> definitely!</a></div>
+					</div> <!-- #yes -->
+					<div id="no" class="yesno">
+						<div id="no-left" class="no-all">
+							<div id="nono">No,</div>
+						</div> <!-- #no-left -->
+						<div id="no-right" class="no-all">
+							<div id="fit"><a href="javascript:void(0)" onclick=writeVote({{uid1}},{{uid2}},0,{{nn1uid}},{{nn2uid}});>not a good fit.</a><br /></div>
+							<div id="taken1"><a href="javascript:void(0)" onclick=writeVote({{uid1}},{{uid2}},0,{{nn1uid}},{{nn2uid}});>{{ name1 }} is taken.</a><br /></div>
+							<div id="taken2"><a href="javascript:void(0)" onclick=writeVote({{uid1}},{{uid2}},0,{{nn1uid}},{{nn2uid}});>{{ name2 }} is taken.</a><br /></div>
+							<div id="likes-same1"><a href="javascript:void(0)" onclick=writeVote({{uid1}},{{uid2}},0,{{nn1uid}},{{nn2uid}});>{{ name1 }} likes {{ interest1 }}.</a><br /></div>
+							<div id="likes-same2"><a href="javascript:void(0)" onclick=writeVote({{uid1}},{{uid2}},0,{{nn1uid}},{{nn2uid}});>{{ name2 }} likes {{ interest2 }}.</a></div>
+						</div> <!-- #no-right -->
+					</div> <!-- #no -->
+				<!-- {% endif %} -->
+	        </div> <!-- #content -->
+	    </div> <!-- #wrapper -->
+        
+        
+        
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-38371647-1'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

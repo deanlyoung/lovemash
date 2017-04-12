@@ -1,0 +1,40 @@
+<!doctype html>
+<!--
+
+This page shows a potential match
+----------------------------------------
+* name1: name of the lefthand person
+* name2: name of the righthand person
+* value: 
+
+-->
+
+<html>
+<head>
+<script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
+<script>
+function doStuff(thename){
+	oname = "Gandalf";
+	window.alert("Hello, "+thename)
+       $.post("http://127.0.0.1:5000/write_test", {name:thename, blah:"La"});
+
+}
+function writeVote(name_a, name_b, theVal, nna, nnb){
+	$.post("http://127.0.0.1:5000/insert_vote", {nameA:name_a, nameB:name_b, val:theVal}).done(function() { window.location = "http://127.0.0.1:5000/fmatch/"+"{{mode}}"+nna+"/"+nnb; })
+}
+function label(person, attribute, value, nna, nnb){
+	$.post("http://127.0.0.1:5000/insert_labeling", {person:person, attribute:attribute, value:value}).done(function() { window.location = "http://127.0.0.1:5000/fmatch/"+"{{mode}}"+nna+"/"+nnb; })
+}
+</script>
+</head>
+<body>
+<title>Flask Test</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='ourstyle.css') }}">
+<p>Should <b> {{ firstPerson }} </b> date <b> {{ secondPerson }}</b>?</p>
+<button type="button" onClick= writeVote("{{ firstPerson }}","{{ secondPerson }}",1,"{{nextFirstPerson}}","{{nextSecondPerson}}")>"Fo Sho!!"</button>
+<button type="button" onClick= writeVote("{{ firstPerson }}","{{ secondPerson }}",0,"{{nextFirstPerson}}","{{nextSecondPerson}}")>"Aw hell NO!!"</button>
+
+<!-- <button type="button" onClick= writeVote("{{ firstPerson }}","{{ secondPerson }}",0)>"Aw hell NO!!"</button> -->
+
+</body>
+</html>
