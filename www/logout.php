@@ -1,0 +1,10 @@
+<?php
+session_start();
+unset($_SESSION['user']);
+unset($_SESSION['id']);
+unset($_SESSION['fb_461518593885961_code']);
+unset($_SESSION['fb_461518593885961_access_token']);
+unset($_SESSION['fb_461518593885961_user_id']);
+header("Location:http://lovemash.deanlyoung.com/index.php");
+exit;
+?>
