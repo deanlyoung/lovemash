@@ -1,9 +1,0 @@
-<mockup version="1.0" skin="wireframe" fontFace="Balsamiq Sans" measuredW="1229" measuredH="877" mockupW="960" mockupH="752">
-  <controls>
-    <control controlID="0" controlTypeID="com.balsamiq.mockups::Component" x="269" y="125" w="960" h="752" measuredW="960" measuredH="752" zOrder="0" locked="false" isInGroup="-1">
-      <controlProperties>
-        <src>$ACCOUNT/assets/Facebook%20Allow%20Access.bmml#Facebook%20Allow%20Access%20Page</src>
-      </controlProperties>
-    </control>
-  </controls>
-</mockup>
